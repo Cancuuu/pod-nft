@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/juancruzlujan/Documents/hackathon/nft-celo/contracts/nftcelo.sol": {
-      "lastModificationDate": 1653163185296,
-      "contentHash": "b76379f26a5ed140a575e1ca26f444c3",
+      "lastModificationDate": 1653182442727,
+      "contentHash": "9a38134e9bf160e3d5861bff66a4e6e9",
       "sourceName": "contracts/nftcelo.sol",
       "solcConfig": {
         "version": "0.8.1",

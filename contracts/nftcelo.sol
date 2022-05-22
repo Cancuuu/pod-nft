@@ -14,11 +14,25 @@ contract ProofOfDonation is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
 
     constructor() ERC721("ProofOfDonation", "POD") {}
 
-    function safeMint(address to, string memory uri) public onlyOwner {
+    mapping(address => mapping(address => uint256)) public minters;
+
+    mapping(address => string) public poolAddressToURI;
+
+    function addPool(address poolContractAddress, string memory uri)
+        public
+        onlyOwner
+    {
+        poolAddressToURI[poolContractAddress] = uri;
+    }
+
+    function safeMint(address poolContractAddress) public {
+        // to do handle nft id == 0 (only first nft)
+        require(minters[msg.sender][poolContractAddress] == 0);
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+        minters[msg.sender][poolContractAddress] = tokenId;
+        _safeMint(msg.sender, tokenId);
+        _setTokenURI(tokenId, poolAddressToURI[poolContractAddress]);
     }
 
     function _burn(uint256 tokenId)
